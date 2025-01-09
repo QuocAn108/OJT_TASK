@@ -1,15 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using OJT_SE181520_HoangQuocAn.Interface;
-using OJT_SE181520_HoangQuocAn.Models.Data;
-using OJT_SE181520_HoangQuocAn.Repository;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
