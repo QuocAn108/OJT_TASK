@@ -8,5 +8,7 @@ namespace OJT_SE181520_HoangQuocAn.Models.Data
         {
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
+
     }
 }
