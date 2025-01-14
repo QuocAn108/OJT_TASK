@@ -1,17 +1,36 @@
 import { useState } from "react";
-import "../styles/FormLogin.css";
+import axios from "axios";
+import "../styles/formLogin.css";
 
 const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      console.log("Login successful, token:", response.data.token);
+      alert("Login successful!");
+      localStorage.setItem("token", response.data.token);
+    } catch (error) {
+      if (error.response) {
+        setErrorMessage(error.response.data.message || "Login failed!");
+      } else {
+        setErrorMessage("Something went wrong. Please try again.");
+      }
+    }
   };
-
   return (
     <div className="login-container">
       <h2>Login</h2>
@@ -36,6 +55,7 @@ const FormLogin = () => {
             className="login-input"
           />
         </div>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button type="submit" className="login-button">
           Login
         </button>
@@ -43,5 +63,4 @@ const FormLogin = () => {
     </div>
   );
 };
-
 export default FormLogin;
