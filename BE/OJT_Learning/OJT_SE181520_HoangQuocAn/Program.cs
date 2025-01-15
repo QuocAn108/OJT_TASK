@@ -32,10 +32,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseRouting(); 
+app.UseCors("AllowOrigin");
 
 app.UseAuthorization();
-app.UseCors("AllowOrigin");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
