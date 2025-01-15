@@ -1,7 +1,9 @@
+import FormLogin from "./Components/formLogin";
+
 function App() {
   return (
     <>
-      <div>Hello World</div>
+      <FormLogin />
     </>
   );
 }
