@@ -9,7 +9,7 @@ namespace OJT_SE181520_HoangQuocAn.Controller
     [ApiController]
     public class UserController(IUserRepository userRepository) : ControllerBase
     {
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(string username, string password)
         {
             var user = await userRepository.CheckLoginAsync(username, password);

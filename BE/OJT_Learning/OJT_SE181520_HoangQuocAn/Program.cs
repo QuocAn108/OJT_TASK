@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using OJT_SE181520_HoangQuocAn.Data;
+using OJT_SE181520_HoangQuocAn.Interface;
+using OJT_SE181520_HoangQuocAn.Repository;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +17,7 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,10 +32,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseRouting(); 
+app.UseCors("AllowOrigin");
 
 app.UseAuthorization();
-app.UseCors("AllowOrigin");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
