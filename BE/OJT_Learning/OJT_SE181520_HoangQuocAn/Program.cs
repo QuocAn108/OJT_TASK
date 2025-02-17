@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader());
 });
 builder.Services.AddDbContext<AppDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("MyDB")));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 var app = builder.Build();
 
